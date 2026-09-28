@@ -1,0 +1,302 @@
+/* Kamile Kacinskaite */
+/* C00312390 */
+/* Project Add New Supplier Screen */
+/* 12/02/26 */
+
+
+/* font imported from google */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* general reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', Arial, sans-serif; /* using the font from the import link */
+}
+
+body {
+    background-color: #f4f6f4; /* white colour */
+    color: #333; /* dark grey colour */
+}
+
+/* header css */
+.main-header {
+    background: linear-gradient(135deg, #c8deda 0%, #a8c8c3 100%); /* ash blue and light teal colours */
+    padding: 30px 25px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+.logo-area img {
+    max-width: 320px;
+    max-height: 170px;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.12)); /* dark grey colour */
+    transition: transform 0.3s ease; /* smooth transition for the zoom effect */
+}
+
+/* subtle zoom effect on hover */
+.logo-area img:hover {
+    transform: scale(1.02); /* slightly zooms in the logo on hover */
+}
+
+/* navigation css */
+.navbar {
+    background: linear-gradient(90deg, #7a000d 0%, #8B000F 50%, #7a000d 100%); /* red colour */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    box-shadow: 0 3px 12px rgba(139, 0, 15, 0.35); /* burgundy colour */
+}
+
+.navbar ul {
+    list-style: none;
+    display: flex;
+    padding: 0;
+    margin: 0;
+}
+
+.navbar > ul > li {
+    position: relative;
+}
+
+/* the top level navigation links */
+.navbar > ul > li > a {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    text-decoration: none;
+    color: rgba(255,255,255,0.92); /* white colour */
+    font-weight: 600;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 18px 26px 15px;
+    border-bottom: 3px solid transparent;
+    transition: all 0.25s ease; /* smooth transition for hover effects */
+}
+
+/* chevron indicator for the dropdowns */
+.navbar > ul > li.dropdown > a::after {
+    content: '▾';
+    font-size: 11px;
+    opacity: 0.75;
+    transition: transform 0.2s ease;
+}
+
+.navbar > ul > li.dropdown:hover > a::after {
+    transform: rotate(180deg);
+}
+
+/* white underline bar and slight bg on hover/active */
+.navbar > ul > li > a:hover,
+.navbar > ul > li > a.active {
+    border-bottom: 3px solid #ffffff; /* white colour */
+    color: #ffffff; /* white colour */
+    background-color: rgba(255, 255, 255, 0.1); /* dark grey colour */
+}
+
+/* dropdown menu css */
+.navbar .dropdown-menu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    background-color: #ffffff; /* white colour */
+    min-width: 200px; /* ensures the dropdown is wide enough for the links */
+    border-top: 3px solid #8B000F; /* red colour */
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12); /* black colour */
+    z-index: 999; /* ensures the dropdown appears above other content */
+    padding: 8px 0;
+    list-style: none;
+}
+
+/* show the dropdown on hover with a fade/slide animation */
+.navbar .dropdown:hover > .dropdown-menu {
+    display: block;
+    animation: fadeSlideDown 0.18s ease; /* using the keyframes defined below */
+}
+
+/* keyframes is a custom animation sequence in CSS that describes how an element should change its appearance over time specifically a combination of fading in and sliding downward */
+/* keyframes for dropdown animation */
+@keyframes fadeSlideDown 
+{
+    from { opacity: 0; transform: translateY(-6px); } /* starts slightly above and transparent */
+    to   { opacity: 1; transform: translateY(0); } /* ends in place and fully visible */
+}
+
+.dropdown-menu li {
+    list-style: none;
+}
+
+.dropdown-menu li a {
+    display: block;
+    color: #444; /* grey colour */
+    font-size: 13.5px;
+    font-weight: 500;
+    text-decoration: none;
+    padding: 11px 20px;
+    border-left: 3px solid transparent;
+    transition: all 0.15s ease;
+}
+
+.dropdown-menu li a:hover {
+    background-color: #fdf0f1; /* white colour */
+    border-left: 3px solid #8B000F; /* red colour */
+    color: #8B000F; /* red colour */
+    padding-left: 24px;
+}
+
+
+
+.hero h1 {
+    font-size: 38px;
+    font-weight: 700;
+    color: #8B000F; /* red colour */
+    margin-bottom: 12px;
+    letter-spacing: -0.5px;
+}
+
+.hero p {
+    font-size: 17px;
+    color: #666; /* grey colour */
+    margin-bottom: 20px;
+    font-weight: 300;
+}
+
+.page-container {
+    padding: 60px 20px;
+    display: flex;
+    justify-content: center; /* centers horizontally */
+    align-items: flex-start; /* aligns to top, but centered */
+    min-height: 100vh;
+    background-color: #f8f9fa; /* light grey background colour*/
+}
+
+.success-banner {
+    background-color: #d4edda; /* light green colour */
+    color: #155724;  /* dark green colour */
+    border: 1px solid #c3e6cb; /* light green colour */
+    padding: 20px;
+    margin-bottom: 30px;
+    border-radius: 8px;
+    text-align: center;
+    font-family: 'Poppins', sans-serif; /* using the same font as the rest of the page */
+}
+
+.return-link {
+    color: #155724; /* dark green colour */
+    font-weight: bold;
+    text-decoration: underline;
+}
+/* card section css*/
+.card {
+    background: white; /* white colour */
+    padding: 45px 50px;
+    width: 100%;
+    max-width: 620px;
+    border-radius: 16px;
+    box-shadow: 0 15px 45px rgba(0, 0, 0, 0.08); /* black colour */
+    border: 1px solid rgba(0,0,0,0.05); /* black colour */
+}
+
+.card h2 {
+    margin-bottom: 10px;
+    color: #8B000F; /* red colour */
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+}
+
+/* decorative underline for the card title */
+.card h2::after /
+{
+    content: '';
+    display: block;
+    width: 50px;
+    height: 3px;
+    background: #8B000F; /* red colour */
+    border-radius: 2px;
+    margin: 12px auto 30px;
+}
+
+/* form */
+form {
+    display: flex;
+    flex-direction: column; /* stack the form elements vertically */
+}
+
+label {
+    margin-top: 18px;
+    font-weight: 600;
+    font-size: 13px;
+    color: #555; /* grey colour */
+    text-transform: uppercase; /* uppercase text */
+    letter-spacing: 0.4px;
+}
+
+input, select {
+    margin-top: 7px;
+    padding: 11px 14px;
+    border-radius: 8px;
+    border: 1.5px solid #e0e0e0; /* light grey colour */
+    font-size: 14px;
+    color: #333; /* dark grey colour */
+    background-color: #fafafa; /* white colour */
+    transition: all 0.25s ease;
+}
+
+/* focus state for inputs and selects */
+input:focus, select:focus {
+    border-color: #8B000F; /* dark red colour */
+    outline: none;
+    background-color: #fff; /* white colour */
+    box-shadow: 0 0 0 3px rgba(139, 0, 15, 0.08); /* dark brown colour */
+}
+
+/* buttons css */
+.button-group {
+    margin-top: 30px;
+    display: flex;
+    gap: 12px;
+}
+
+/* shared styles for both submit and cancel buttons */
+.button-group input {
+    flex: 1;
+    padding: 12px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer; /* pointer cursor on hover */
+    border: none;
+    transition: all 0.25s ease;
+    letter-spacing: 0.3px;
+}
+
+/* submit button styles */
+input[type="submit"] {
+    background: linear-gradient(135deg, #8B000F, #a80012); /* bright red and orange colours */
+    color: white; /* white colour */
+    box-shadow: 0 4px 12px rgba(139, 0, 15, 0.25); /* plum colour */
+}
+
+/* hover state for submit button */
+input[type="submit"]:hover {
+    background: linear-gradient(135deg, #6e000c, #8B000F); /* bright red and red/orange colours */
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(139, 0, 15, 0.35); /* plum colour */
+}
+
+input[type="button"] {
+    background-color: #f0f0f0; /* white colour */
+    color: #555; /* grey colour */
+    border: 1.5px solid #ddd; /* grey/white colour */
+}
+
+input[type="button"]:hover {
+    background-color: #e5e5e5; /* white colour */
+    color: #333; /* darker grey colour */
+}

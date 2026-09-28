@@ -1,0 +1,249 @@
+
+/* Kamile Kacinskaite */
+/* C00312390 */
+/* Project Contact Lens Sales Screen */
+/* 19/02/26 */
+ 
+/* importing the Poppins font from Google Fonts for use throughout the page */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', Arial, sans-serif;
+}
+ 
+body {
+    background-color: #f4f6f4; /* light off-white background  */
+    color: #333; /* dark gray text  */
+}
+ 
+/* header */
+.main-header {
+    background: linear-gradient(135deg, #c8deda 0%, #a8c8c3 100%); /* white and light teal gradient */
+    padding: 30px 25px;
+    text-align: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.08); /* subtle shadow for depth */
+}
+ 
+.logo-area img {
+    max-width: 320px;
+    max-height: 170px;
+    filter: drop-shadow(0 2px 6px rgba(0,0,0,0.12)); /* subtle shadow for depth */
+    transition: transform 0.3s ease; /* smooth scaling on hover  */
+}
+ 
+/* slightly enlarge the logo on hover for a subtle interactive effect */
+.logo-area img:hover { transform: scale(1.02); }
+ 
+/* navbar */
+.navbar {
+    background: linear-gradient(90deg, #7a000d 0%, #8B000F 50%, #7a000d 100%); /* deep red gradient */
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    padding: 0;
+    box-shadow: 0 3px 12px rgba(139,0,15,0.35); /* stronger red shadow  */
+}
+ 
+/* styling the navbar list to be horizontal with no default list styles and spacing between items */
+.navbar > ul { list-style: none; display: flex; padding: 0; margin: 0; }
+ 
+.navbar > ul > li { position: relative; }
+ 
+/* styling the navbar links with uppercase text spacing and a bottom border that appears on hover or when active */
+.navbar > ul > li > a {
+    display: flex; align-items: center; gap: 6px;
+    text-decoration: none; color: rgba(255,255,255,0.92);
+    font-weight: 600; font-size: 13px; text-transform: uppercase;
+    letter-spacing: 1px; padding: 18px 26px 15px;
+    border-bottom: 3px solid transparent; transition: all 0.25s ease;
+}
+ 
+.navbar > ul > li > a:hover,
+.navbar > ul > li > a.active {
+    border-bottom: 3px solid #fff; color: #fff; /* white underline and text on hover/active */
+    background-color: rgba(255,255,255,0.1); /* subtle white background on hover/active */
+}
+ 
+.dropdown-menu {
+    display: none; position: absolute; top: 100%; left: 0; /* position below the parent menu item */
+    background: #fff; min-width: 200px; /* white background and minimum width for dropdown */
+    border-top: 3px solid #8B000F; border-radius: 0 0 10px 10px; /* red top border and rounded bottom corners for dropdown */
+    box-shadow: 0 8px 24px rgba(0,0,0,0.12); z-index: 999; /* shadow for depth and ensure it appears above other content */
+    padding: 8px 0; list-style: none; /* remove default list styles and add vertical padding for dropdown items */
+}
+ 
+/* show the dropdown menu when hovering over the parent menu item */
+.navbar .dropdown:hover > .dropdown-menu { display: block; }
+ 
+.dropdown-menu li a {
+    display: block; color: #444; font-size: 13.5px; font-weight: 500; /* dark grey slightly larger font size for dropdown items */
+    text-decoration: none; padding: 11px 20px;
+    border-left: 3px solid transparent; transition: all 0.15s ease; /* transparent left border that will animate on hover for a sliding effect */
+}
+ 
+.dropdown-menu li a:hover {
+    background: #fdf0f1; border-left: 3px solid #8B000F; /* light pink background and red left border on hover for dropdown items */
+    color: #8B000F; padding-left: 24px; /* increase left padding on hover for a sliding effect */
+}
+ 
+/* page container */
+.page-container {
+    padding: 50px 20px;
+    display: flex;
+    justify-content: center;
+}
+ 
+.card {
+    background: white; /* white colour */
+    padding: 45px 50px;
+    width: 100%;
+    max-width: 700px;
+    border-radius: 16px;
+    box-shadow: 0 15px 45px rgba(0,0,0,0.08); /* soft shadow for depth */
+    border: 1px solid rgba(0,0,0,0.05); /* subtle border for definition */
+}
+ 
+.card h2 {
+    margin-bottom: 10px; color: #8B000F; /* deep red colour for the heading */
+    text-align: center; font-size: 24px; font-weight: 700; /* larger bold font for the heading */
+}
+ 
+.card h2::after {
+    content: ''; display: block; width: 50px; height: 3px; /* small underline below the heading */
+    background: #8B000F; border-radius: 2px; margin: 12px auto 30px; /* small red underline below the heading */
+}
+ 
+/* form sections */
+form { display: flex; flex-direction: column; }
+ 
+.form-section {
+    border: 1px solid #e8eee8; /* light green border for form sections */
+    border-radius: 12px;
+    padding: 20px 22px;
+    margin-bottom: 22px;
+    background: #fafcfa; /* very light green background for form sections */
+}
+ 
+.section-label {
+    font-size: 12px; font-weight: 700; color: #8B000F; /* deep red colour for section labels */
+    text-transform: uppercase; letter-spacing: 0.6px;
+    padding: 0 6px;
+}
+ 
+label {
+    margin-top: 14px; font-weight: 600; font-size: 13px;
+    color: #555; text-transform: uppercase; letter-spacing: 0.4px; /* dark gray colour for labels and uppercase with spacing for clarity */
+    display: block;
+}
+ 
+input, select {
+    margin-top: 7px; padding: 11px 14px; border-radius: 8px; /* rounded corners for inputs and selects */
+    border: 1.5px solid #e0e0e0; font-size: 14px; color: #333; /* dark gray text colour for inputs and selects */
+    background: #fafafa; transition: all 0.25s ease; width: 100%; /* full width for better usability */
+}
+ 
+input:focus, select:focus {
+    border-color: #8B000F; outline: none; background: #fff; /* red border and white background on focus for better visibility */
+    box-shadow: 0 0 0 3px rgba(139,0,15,0.08); /* subtle red shadow on focus for emphasis */
+}
+ 
+/* info box */
+.info-box {
+    margin-top: 14px; background: #fff; /* white background for the info box */
+    border: 1px solid #e0e8df; border-radius: 10px; /* light green border and rounded corners for the info box */
+    padding: 14px 16px;
+}
+ 
+.info-row {
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 6px 0; border-bottom: 1px solid #f0f0f0; /* light gray border between rows for separation */
+}
+ 
+/* remove the bottom border from the last info row for a cleaner look */
+.info-row:last-child { border-bottom: none; }
+ 
+.info-label {
+    font-size: 12px; font-weight: 600; color: #888; /* medium gray colour for info labels */
+    text-transform: uppercase; letter-spacing: 0.4px;
+}
+
+/* slightly larger and darker text for info values to differentiate from labels */
+.info-value { font-size: 14px; color: #333; font-weight: 500; }
+ 
+/* two column layout */
+.two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* two equal columns */
+    gap: 18px;
+    margin-top: 6px;
+}
+ 
+/* month picker*/
+.months-picker {
+    display: flex; align-items: center; gap: 14px;
+    margin-top: 14px; justify-content: center;
+}
+ 
+.month-btn {
+    width: 38px; height: 38px; border-radius: 50%;
+    background: #8B000F; color: white; border: none; /* circular deep red buttons with white text for month adjustment */
+    font-size: 20px; font-weight: 700; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.2s ease; /* smooth background transition on hover */
+    line-height: 1; /* ensure the text is vertically centered within the button */
+}
+ 
+/* slightly darken the month adjustment buttons on hover for better interactivity feedback */
+.month-btn:hover { background: #6e000c; } /* darker red on hover for month adjustment buttons */
+ 
+#monthsDisplay {
+    font-size: 26px; font-weight: 700; color: #8B000F; /* larger bold deep red text for the month display */
+    min-width: 30px; text-align: center;
+}
+ 
+.months-label { font-size: 14px; color: #666; font-weight: 500; } /* smaller medium gray text for the months label */
+ 
+/* note */
+.note { font-size: 11px; color: #999; margin-top: 10px; } /* small light gray text for notes and disclaimers */
+ 
+/* total box */
+.total-box {
+    display: flex; justify-content: space-between; align-items: center;
+    background: linear-gradient(135deg, #8B000F, #a80012);
+    color: white; padding: 18px 24px; border-radius: 12px; /* red gradient background with white text for the total cost box */
+    margin-bottom: 14px;
+}
+/* smaller label text and larger bold text for the total amount to make it stand out */ 
+.total-label { font-size: 14px; font-weight: 600; letter-spacing: 0.4px; }
+ 
+/* larger bold text for the total amount to make it stand out */
+.total-amount { font-size: 24px; font-weight: 700; }
+ 
+/* buttons*/
+.button-group { display: flex; gap: 12px; }
+ 
+.button-group input {
+    flex: 1; padding: 12px; border-radius: 8px;
+    font-size: 14px; font-weight: 600; cursor: pointer;
+    border: none; transition: all 0.25s ease; letter-spacing: 0.3px;
+}
+ 
+input[type="submit"] {
+    background: linear-gradient(135deg, #8B000F, #a80012); /* red gradient background for the submit button */
+    color: white; box-shadow: 0 4px 12px rgba(139,0,15,0.25);/* subtle red shadow for depth on the submit button */
+}
+ 
+input[type="submit"]:hover {
+    background: linear-gradient(135deg, #6e000c, #8B000F); /* darker red gradient on hover for the submit button */
+    transform: translateY(-1px);
+    box-shadow: 0 6px 16px rgba(139,0,15,0.35); /* stronger shadow on hover for the submit button */
+}
+ 
+input[type="button"] {
+    background: #f0f0f0; color: #555; border: 1.5px solid #ddd; /* light gray background and border for the reset button */
+}
+ 
+input[type="button"]:hover { background: #e5e5e5; color: #333; } /* slightly darker background and darker text on hover for the reset button */

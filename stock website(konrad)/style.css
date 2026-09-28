@@ -1,0 +1,580 @@
+/* ================= GOOGLE FONT IMPORT ================= */
+/* Importing the 'Poppins' font from Google Fonts with multiple weights */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+/* ================= GENERAL RESET ================= */
+/* Resetting margin, padding, box-sizing, and setting default font */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box; /* Ensures padding/border doesn't affect element size */
+  font-family:'Poppins', Arial, sans-serif; /* Default font with fallbacks */
+}
+
+/* ================= CSS VARIABLES ================= */
+/* Root variables for colors and theme management */
+:root{
+  --bg:#f4f6f4;         /* Page background */
+  --card:#ffffff;        /* Card/form background */
+
+  --brand:#8B000F;       /* Primary brand color (dark red) */
+  --brand-dark:#6e000c;  /* Darker variant for hover/gradient effects */
+
+  --muted:#666;           /* Secondary text */
+  --text:#333;            /* Default text color */
+  --border:#e0e0e0;      /* Border color for inputs and cards */
+
+  --header-a:#c8deda;    /* Header gradient start */
+  --header-b:#a8c8c3;    /* Header gradient end */
+}
+
+/* ================= BODY & HTML ================= */
+html, body { height:100%; } /* Ensure body occupies full height */
+body{
+  background-color: var(--bg);
+  color: var(--text);       /* Default font color */
+}
+
+/* ================= LAYOUT WRAPPER ================= */
+.app{
+  display:flex;             /* Flex layout for vertical stacking */
+  min-height:100vh;         /* Fill viewport height */
+  flex-direction:column;    /* Stack header, main, footer vertically */
+}
+
+.main{
+  flex:1;                   /* Take remaining space */
+  display:flex;
+  flex-direction:column;    /* Stack main content vertically */
+}
+
+/* ================= HEADER ================= */
+/* Styles for new header structure and fallback old sidebar */
+.main-header,
+.sidebar{
+  background: linear-gradient(135deg, var(--header-a) 0%, var(--header-b) 100%);
+  padding: 30px 25px;
+  text-align:center;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+  position:relative;
+  border-bottom: none; /* Override old bottom border if any */
+  height:auto;          /* Flexible height for responsiveness */
+  display:block;        /* Ensure block display (overrides old flex bar) */
+}
+
+/* Logo image styling */
+.logo-area img,
+.sidebar .logo{
+  max-width: 320px;
+  max-height: 170px;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.12)); /* subtle shadow */
+  transition: transform 0.3s ease; /* smooth hover scaling */
+}
+
+/* Slight scaling effect on hover */
+.logo-area img:hover,
+.sidebar .logo:hover{
+  transform: scale(1.02);
+}
+
+/* Hide old text-based brand if logo is used */
+.sidebar .brand{ display:none; }
+
+/* ================= NAVIGATION ================= */
+/* Main nav bar gradient, shadow, and layout */
+.navbar{
+  background: linear-gradient(90deg, #7a000d 0%, var(--brand) 50%, #7a000d 100%);
+  width:100%;
+  display:flex;
+  justify-content:center; /* Center the menu items horizontally */
+  padding:0;
+  box-shadow: 0 3px 12px rgba(139,0,15,0.35);
+}
+
+/* Old menu fallback */
+.menu{
+  background: linear-gradient(90deg, #7a000d 0%, var(--brand) 50%, #7a000d 100%);
+  width:100%;
+  display:flex;
+  justify-content:center;
+  gap:0;
+  padding:0;
+  box-shadow: 0 3px 12px rgba(139,0,15,0.35);
+}
+
+/* Remove bullets from lists */
+.navbar ul,
+.menu{
+  list-style:none;
+  margin:0;
+}
+
+/* Flex layout for top nav items */
+.navbar ul{
+  display:flex;
+  padding:0;
+}
+
+.navbar > ul > li{ position:relative; } /* needed for dropdown positioning */
+
+/* ================= TOP LINKS ================= */
+.navbar > ul > li > a,
+.menu-item{
+  display:flex;
+  align-items:center;
+  gap:6px;                 /* Small space between icon/text */
+  text-decoration:none;
+  color: rgba(255,255,255,0.92);
+  font-weight:600;
+  font-size:13px;
+  text-transform:uppercase;
+  letter-spacing:1px;
+  padding:18px 26px 15px;
+  border-bottom:3px solid transparent; /* underline effect on hover/active */
+  border-radius:0;
+  cursor:pointer;
+  transition: all 0.25s ease;
+}
+
+/* Hover / active state for links */
+.navbar > ul > li > a:hover,
+.navbar > ul > li > a.active,
+.menu-item:hover,
+.menu-item.active{
+  border-bottom:3px solid #ffffff;
+  color:#ffffff;
+  background-color: rgba(255,255,255,0.10); /* subtle highlight */
+}
+
+/* Dropdown chevron indicators */
+.navbar > ul > li.dropdown > a::after{
+  content:'▾';
+  font-size:11px;
+  opacity:0.75;
+  transition: transform 0.2s ease;
+}
+.navbar > ul > li.dropdown:hover > a::after{
+  transform: rotate(180deg);
+}
+
+/* Old dropdown toggle */
+.menu-dropdown .dd-toggle::after{
+  content:'▾';
+  margin-left:6px;
+  font-size:11px;
+  opacity:0.75;
+  transition: transform 0.2s ease;
+}
+.menu-dropdown:hover .dd-toggle::after{ transform: rotate(180deg); }
+
+/* ================= DROPDOWNS ================= */
+/* New dropdown panel hidden by default */
+.navbar .dropdown-menu{
+  display:none !important;
+  position:absolute;
+  top:100%;
+  left:0;
+  background:#ffffff;
+  min-width:200px;
+  border-top:3px solid var(--brand);
+  border-radius:0 0 10px 10px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  z-index:999;
+  padding:8px 0;
+  list-style:none;
+}
+
+/* Show dropdown on hover with animation */
+.navbar .dropdown:hover > .dropdown-menu{
+  display:block !important;
+  animation: fadeSlideDown 0.18s ease;
+}
+
+/* Slide down fade animation */
+@keyframes fadeSlideDown{
+  from{ opacity:0; transform: translateY(-6px); }
+  to  { opacity:1; transform: translateY(0); }
+}
+
+/* Dropdown links style */
+.dropdown-menu li a{
+  display:block;
+  color:#444;
+  font-size:13.5px;
+  font-weight:500;
+  text-decoration:none;
+  padding:11px 20px;
+  border-left:3px solid transparent;
+  transition: all 0.15s ease;
+}
+
+.dropdown-menu li a:hover{
+  background-color:#fdf0f1;
+  border-left:3px solid var(--brand);
+  color: var(--brand);
+  padding-left:24px; /* extra padding for hover effect */
+}
+
+/* Old dropdown panel styling to match new one */
+.menu-dropdown{ position:relative; }
+
+.dd-menu{
+  display:none !important;
+  position:absolute;
+  top:100%;
+  left:0;
+  min-width:200px;
+  background:#ffffff;
+  border-top:3px solid var(--brand);
+  border-radius:0 0 10px 10px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.12);
+  z-index:999;
+  padding:8px 0;
+}
+
+.menu-dropdown:hover > .dd-menu,
+.menu-dropdown.open > .dd-menu{
+  display:block !important;
+  animation: fadeSlideDown 0.18s ease;
+}
+
+.dd-item{
+  display:block;
+  width:100%;
+  text-align:left;
+  padding:11px 20px;
+  color:#444;
+  font-size:13.5px;
+  font-weight:500;
+  text-decoration:none;
+  border-left:3px solid transparent;
+  transition: all 0.15s ease;
+}
+
+.dd-item:hover{
+  background-color:#fdf0f1;
+  border-left:3px solid var(--brand);
+  color: var(--brand);
+  padding-left:24px;
+}
+
+/* ================= HERO SECTION ================= */
+.hero,
+.main-header + .hero{
+  text-align:center;
+  padding:65px 20px;
+  background: linear-gradient(160deg, #eef4ec 0%, #f5f9f4 100%);
+  border-bottom:1px solid #e0e8df;
+}
+
+.hero h1{
+  font-size:38px;
+  font-weight:700;
+  color: var(--brand);
+  margin-bottom:12px;
+  letter-spacing:-0.5px;
+}
+
+.hero p{
+  font-size:17px;
+  color: var(--muted);
+  margin-bottom:35px;
+  font-weight:300;
+}
+
+/* Call-to-action buttons */
+.cta-buttons a{
+  display:inline-block;
+  background-color: var(--brand);
+  color:white;
+  padding:14px 32px;
+  font-size:15px;
+  font-weight:600;
+  text-decoration:none;
+  border-radius:50px;
+  margin:8px;
+  box-shadow: 0 4px 14px rgba(139,0,15,0.30);
+  transition: all 0.25s ease;
+  letter-spacing:0.3px;
+}
+
+.cta-buttons a:hover{
+  background-color: var(--brand-dark);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(139,0,15,0.40);
+}
+
+/* ================= CONTENT AREA ================= */
+.page-container,
+.content{
+  padding:50px 20px;
+  display:flex;
+  justify-content:center;
+}
+
+.content > h2,
+.content > p,
+.content .muted{
+  max-width:580px;
+  width:100%;
+}
+
+/* ================= CARDS / FORMS ================= */
+.card,
+.card-form{
+  background: white;
+  padding: 40px 45px;
+  width:100%;
+  max-width:580px;
+  border-radius:16px;
+  box-shadow: 0 10px 40px rgba(0,0,0,0.07);
+  border:1px solid rgba(0,0,0,0.05);
+  margin: 0 auto;
+}
+
+.card h2,
+.card-form h2{
+  margin-bottom:8px;
+  color: var(--brand);
+  text-align:center;
+  font-size:22px;
+  font-weight:700;
+}
+
+.card h2::after,
+.card-form h2::after{
+  content:'';
+  display:block;
+  width:50px;
+  height:3px;
+  background: linear-gradient(90deg, var(--brand), #c0392b);
+  border-radius:2px;
+  margin:10px auto 24px;
+}
+
+/* ================= FORM ELEMENTS ================= */
+form{ display:flex; flex-direction:column; }
+
+label{
+  margin-top:18px;
+  font-weight:600;
+  font-size:13px;
+  color:#555;
+  text-transform:uppercase;
+  letter-spacing:0.4px;
+}
+
+input, select, textarea{
+  margin-top:7px;
+  padding:11px 14px;
+  border-radius:8px;
+  border:1.5px solid var(--border);
+  font-size:14px;
+  color:#333;
+  background-color:#fafafa;
+  transition: all 0.25s ease;
+  width:100%;
+}
+
+input:focus, select:focus, textarea:focus{
+  border-color: var(--brand);
+  outline:none;
+  background-color:#fff;
+  box-shadow: 0 0 0 3px rgba(139,0,15,0.08);
+}
+
+/* ================= BUTTONS ================= */
+.button-group,
+.form-actions,
+.form-action{
+  margin-top:30px;
+  display:flex;
+  gap:12px;
+}
+
+input[type="submit"],
+input[type="reset"],
+.form-actions button{
+  flex:1;
+  padding:12px;
+  border-radius:8px;
+  font-size:14px;
+  font-weight:600;
+  cursor:pointer;
+  border:none;
+  transition: all 0.25s ease;
+  letter-spacing:0.3px;
+  margin:0;
+}
+
+/* Submit / Save styling */
+input[type="submit"],
+.btn-save{
+  background: linear-gradient(135deg, var(--brand), #a80012);
+  color:white;
+  box-shadow: 0 4px 12px rgba(139,0,15,0.25);
+}
+
+input[type="submit"]:hover,
+.form-actions button.btn-save:hover{
+  background: linear-gradient(135deg, var(--brand-dark), var(--brand));
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(139,0,15,0.35);
+}
+
+/* Reset / Cancel styling */
+input[type="reset"],
+.btn-cancel{
+  background-color:#f0f0f0;
+  color:#555;
+  border:1.5px solid #ddd;
+}
+
+input[type="reset"]:hover,
+.form-actions button.btn-cancel:hover{
+  background-color:#e5e5e5;
+  color:#333;
+}
+
+/* Required fields styling */
+.req{ color:#c08; font-weight:bold; margin-left:4px; }
+input:required:invalid{ border:1.5px solid #c00; }
+input:required:valid{ border:1.5px solid #4CAF50; }
+
+/* ================= TABLES ================= */
+.table-wrap{
+  width:100%;
+  overflow-x:auto;
+  -webkit-overflow-scrolling:touch;
+  margin: 0 -45px;         /* counteract card padding */
+  padding: 0 45px;         /* restore padding inside scroll area */
+  max-width: calc(100% + 90px);  /* allow it to use full card width */
+}
+
+.simple-table{
+  width:100%;
+  min-width:760px;         /* prevents table from shrinking too small */
+  border-collapse:collapse;
+  margin-top:10px;
+  background:#fff;
+}
+
+.simple-table th,
+.simple-table td{
+  border:1px solid #ddd;
+  padding:10px;
+  white-space:normal;
+  word-break:break-word;
+}
+
+/* ================= FEATURES ================= */
+.features{
+  padding:60px 20px;
+  background: linear-gradient(160deg, #f9faf8 0%, #f2f6f0 100%);
+  text-align:center;
+  border-top:1px solid #e5ece4;
+}
+
+.features h2{
+  font-size:26px;
+  font-weight:700;
+  margin-bottom:10px;
+  color:#2c2c2c;
+}
+
+.features h2::after{
+  content:'';
+  display:block;
+  width:40px;
+  height:3px;
+  background: var(--brand);
+  border-radius:2px;
+  margin:10px auto 35px;
+}
+
+.card{
+  overflow: hidden;
+}
+
+.feature-cards{
+  display:flex;
+  justify-content:center;
+  gap:24px;
+  flex-wrap:wrap;
+}
+
+.feature-card{
+  background:#fff;
+  padding:28px 22px;
+  width:240px;
+  border-radius:12px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.07);
+  border:1px solid rgba(0,0,0,0.05);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.feature-card:hover{
+  transform: translateY(-4px);
+  box-shadow: 0 8px 28px rgba(0,0,0,0.11);
+}
+
+.feature-card p{
+  font-size:15px;
+  color:#555;
+  margin-bottom:16px;
+  line-height:1.5;
+}
+
+.feature-card a{
+  text-decoration:none;
+  color: var(--brand);
+  font-weight:600;
+  font-size:13.5px;
+  border-bottom:1.5px solid rgba(139,0,15,0.25);
+  padding-bottom:2px;
+  transition: border-color 0.2s ease;
+}
+
+.feature-card a:hover{
+  border-color: var(--brand);
+}
+
+/* ================= FOOTER ================= */
+footer,
+.main-footer{
+  background: linear-gradient(135deg, var(--header-a) 0%, #b7d3cf 100%);
+  text-align:center;
+  padding:24px 20px;
+  border-top:none;
+  color:#4a5e5c;
+  font-size:13px;
+  font-weight:500;
+  letter-spacing:0.2px;
+}
+
+/* ================= MOBILE RESPONSIVE ================= */
+@media (max-width: 700px){
+  .navbar > ul{
+    flex-wrap:wrap;
+    justify-content:center;
+  }
+
+  .navbar > ul > li > a,
+  .menu-item{
+    padding:16px 16px 13px;
+  }
+
+  .card, .card-form{
+    padding:28px 20px;
+  }
+
+  .table-wrap{
+    margin: 0 -20px;
+    padding: 0 20px;
+    max-width: calc(100% + 40px);
+  }
+
+  .button-group, .form-actions, .form-action{
+    flex-direction:column;
+  }
+}
